@@ -1,6 +1,6 @@
-
+// Class for creating one instance of desired coffee
 public class CoffeeFactory {
-	// Return method for coffee
+
 	public Coffee getCoffee(String coffeeType) {
 		if (coffeeType == null) {
 			return null;

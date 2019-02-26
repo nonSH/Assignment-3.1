@@ -2,7 +2,10 @@ package tools;
 
 import java.util.Random;
 
+// Toolkit for all random interactions
 public class RandomGenerator {
+
+	// Energy for black coffee, cappucino and latte
 	public static int blackEnergy() {
 		Random r = new Random();
 		int i = r.nextInt(20) + 20;
@@ -21,6 +24,7 @@ public class RandomGenerator {
 		return i;
 	}
 
+	// Returns a random type of coffee
 	public static String randomCoffeeType() {
 		Random r = new Random();
 		int i = r.nextInt(3);
@@ -39,6 +43,7 @@ public class RandomGenerator {
 		return type;
 	}
 
+	// Returns true 1/5 times. Used to decide bonus cups of coffee
 	public static boolean bonusCoffeeChance() {
 		Random r = new Random();
 		int i = r.nextInt(5);

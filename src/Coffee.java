@@ -1,4 +1,4 @@
-
+// Interface implemented by all kinds of hot drinks
 public interface Coffee {
 	void drink();
 }

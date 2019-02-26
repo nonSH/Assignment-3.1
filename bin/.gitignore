@@ -7,6 +7,9 @@
 /Latte.class
 /Names.class
 /Person.class
-/main.class
-/tools/
 /ThatsANiceFace.class
+/main.class
+/.classpath
+/.gitignore
+/.project
+/tools/

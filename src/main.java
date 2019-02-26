@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class main {
 
@@ -9,3 +8,13 @@ public class main {
 		t1.start();
 	}
 }
+
+/*
+ * Added comments
+ * Created initiateCoffee() as own method instead of calling it in constructor
+ * Created initiateBreakroom() as own method instead of calling it in constructor
+ * 
+ * To-do:
+ * Create a coffee room in main, perhaps send as argument in Person as pointer?
+ * Drink() methods for each coffee
+ */
