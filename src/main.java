@@ -3,18 +3,25 @@ public class main {
 
 
 	public static void main(String[] args) {
+		BreakRoom breakRoom = BreakRoom.getBreakRoom();
 		
-		Thread t1 = new Thread(new Person());
+		Thread t1 = new Thread(new Person(breakRoom));
+		Thread t2 = new Thread(new Person(breakRoom));
+		Thread t3 = new Thread(new Person(breakRoom));
+		Thread t4 = new Thread(new Person(breakRoom));
+		Thread t5 = new Thread(new Person(breakRoom));
 		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		t5.start();
 	}
 }
 
 /*
- * Added comments
- * Created initiateCoffee() as own method instead of calling it in constructor
- * Created initiateBreakroom() as own method instead of calling it in constructor
- * 
+
  * To-do:
- * Create a coffee room in main, perhaps send as argument in Person as pointer?
- * Drink() methods for each coffee
+
+ * Two persons with same name?
+ * Everyone goes to get coffee the same time. Energy levels is correct. WTF? syncing?
  */

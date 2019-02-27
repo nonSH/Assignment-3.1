@@ -3,7 +3,7 @@ import tools.RandomGenerator;
 // Class implementing Coffee interface, inherits drink() method
 public class Cappucino implements Coffee {
 	private int energy;
-	private String drink = "Black coffee";
+	private String drink = "Cappucino";
 
 	public Cappucino() {
 		// Uses RandomGenerator class
@@ -11,9 +11,13 @@ public class Cappucino implements Coffee {
 	}
 
 	@Override
-	public void drink() {
-		// TODO Auto-generated method stub
-
+	public int drink() {
+		return energy;
 	}
+	@Override
+	public String drinkType() {
+		return drink;
+	}
+
 
 }

@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 
+import tools.RandomGenerator;
+
 // Singleton class for interactions between coffee machine, coffee, and persons
 public class BreakRoom {
 	private static BreakRoom obj;
-	private ArrayList<Coffee> coffeeArray;
+	private static ArrayList<Coffee> coffeeArray;
 	private CoffeeMachine machine;
 
 	// Constructor. Called by getBreakRoom()
 	private BreakRoom() {
 		initiateBreakroom();
-		coffeeArray.get(0).drink();
+		System.out.println();
 	}
-	
+
 	private void initiateBreakroom() {
 		coffeeArray = new ArrayList<>();
 		machine = new CoffeeMachine();
@@ -19,14 +21,25 @@ public class BreakRoom {
 	}
 
 	// Add bonus coffee to machine
-	private void bonusCoffee() {
+	public void bonusCoffee() {
 		for (int i = 0; i < 5; i++) {
 			coffeeArray.add(machine.coffeeCup());
 		}
 	}
 
+	// Returns first drink in ArrayList and removes it
+	public synchronized Coffee serveCoffee() {
+		Coffee coffee = coffeeArray.get(0);
+		coffeeArray.remove(0);
+		return coffee;
+	}
+
+	public int remainingCoffee() {
+		return coffeeArray.size();
+	}
+
 	// Constructs a BreakRoom if one is not already instantiated
-	public static BreakRoom getBreakRoom() {
+	public static synchronized BreakRoom getBreakRoom() {
 		if (obj == null) {
 			obj = new BreakRoom();
 		}

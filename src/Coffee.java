@@ -1,4 +1,5 @@
 // Interface implemented by all kinds of hot drinks
 public interface Coffee {
-	void drink();
+	int drink();
+	String drinkType();
 }

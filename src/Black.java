@@ -10,8 +10,12 @@ public class Black implements Coffee {
 		energy = RandomGenerator.blackEnergy();
 	}
 	@Override
-	public void drink() {
-		// return energy level so person drinking it can....
+	public int drink() {
+		return energy;
+	}
+	@Override
+	public String drinkType() {
+		return drink;
 	}
 
 }
