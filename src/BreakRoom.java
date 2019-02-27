@@ -11,7 +11,6 @@ public class BreakRoom {
 	// Constructor. Called by getBreakRoom()
 	private BreakRoom() {
 		initiateBreakroom();
-		System.out.println();
 	}
 
 	private void initiateBreakroom() {
@@ -27,18 +26,20 @@ public class BreakRoom {
 		}
 	}
 
-	// Returns first drink in ArrayList and removes it
+	// Returns first drink in ArrayList and removes it from "machine"
 	public synchronized Coffee serveCoffee() {
 		Coffee coffee = coffeeArray.get(0);
 		coffeeArray.remove(0);
 		return coffee;
 	}
 
+	// Get amount of drinks remaining
 	public int remainingCoffee() {
 		return coffeeArray.size();
 	}
 
 	// Constructs a BreakRoom if one is not already instantiated
+	// "Synchronized" prevents accidental duplicates
 	public static synchronized BreakRoom getBreakRoom() {
 		if (obj == null) {
 			obj = new BreakRoom();

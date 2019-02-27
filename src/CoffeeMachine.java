@@ -26,9 +26,8 @@ public class CoffeeMachine {
 		return list;
 	}
 
-	// method for creating one bonus cup of coffee
+	// Method for creating one cup of coffee
 	public Coffee coffeeCup() {
-
 		Coffee c = factory.getCoffee(RandomGenerator.randomCoffeeType());
 		return c;
 	}
