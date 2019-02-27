@@ -31,6 +31,7 @@ public class Person implements Runnable {
 	// Set-method used when drinking coffee. Remove this later
 	public void setEnergy(int energy) {
 		mEnergy += energy;
+		System.out.println(mEnergy);
 	}
 
 	@Override
