@@ -36,16 +36,16 @@ public class Person implements Runnable {
 
 	@Override
 	public void run() {
-		while (mEnergy > 0) {
 			setEnergy(-1);
-			// System.out.println(mName + " has "+mEnergy+ " energy.");
+			// Three if/else-statements to react to energy level
 			if (mEnergy >= 100) {
 				System.out.println(mName + " going back to work.");
 			} else if (mEnergy <= 30) {
 				System.out.println(mName + " goes to get some coffee.");
 				Coffee coffee = mBreakRoom.serveCoffee();
 				mEnergy += coffee.drink();
-
+				
+				// Delay while drinking
 				try {
 					Thread.sleep(1000);
 				} catch (Exception e) {
@@ -53,20 +53,16 @@ public class Person implements Runnable {
 
 				System.out.println(mName + " consumes a " + coffee.drinkType() +
 						" and now has " + mEnergy + " energy.");
+				// One in five chance to create 5 bonus cups of coffee
 				if (RandomGenerator.bonusCoffeeChance()) {
 					mBreakRoom.bonusCoffee();
 					System.out.println("5 drinks added!");
 
 				}
 				System.out.println("Drinks remaining in machine: " + mBreakRoom.remainingCoffee());
-
-				// System.out.println("Coffee machine has
-				// "+BreakRoom.getBreakRoom().remainingCoffee()+" drinks remaining.");
-			}
+			} else if (mEnergy<= 0) {
+				System.out.println("Fuck this i'm going home.");
+				// Delete person
 		}
-
-		System.out.println("Fuck this i'm going home.");
-		// Delete person
-
 	}
 }

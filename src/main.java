@@ -1,10 +1,9 @@
 
 public class main {
 
-
 	public static void main(String[] args) {
 		BreakRoom breakRoom = BreakRoom.getBreakRoom();
-		
+
 		Thread t1 = new Thread(new Person(breakRoom));
 		Thread t2 = new Thread(new Person(breakRoom));
 		Thread t3 = new Thread(new Person(breakRoom));
@@ -19,9 +18,7 @@ public class main {
 }
 
 /*
-
+ * 
  * To-do:
-
  * Two persons with same name?
- * Everyone goes to get coffee the same time. Energy levels is correct. WTF? syncing?
  */
