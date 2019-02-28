@@ -20,7 +20,7 @@ public class Person implements Runnable {
 
 	// Temporary method. Remove
 	public void energy() {
-		System.out.println(mEnergy +" :"+ mName);
+		System.out.println(mEnergy + " :" + mName);
 	}
 
 	// Method to adjust energy level, both static loss and gain when drinking coffee
@@ -30,37 +30,50 @@ public class Person implements Runnable {
 
 	@Override
 	public void run() {
+
 		while (mEnergy > 0) {
-			setEnergy(-5);
+			setEnergy(-15);
 			try {
 				// Small delay so Thread is not locking program to one person
 				Thread.sleep(200);
-			} catch (Exception e) {}
-			// Two if/else-statements to react to energy level
-			if (mEnergy >= 100) {
-				System.out.println(mName + " going back to work.");
-				// Make person go to office
-			} else if (mEnergy <= 30) {
+			} catch (Exception e) {
+			}
+
+			if (mEnergy <= 30 && BreakRoom.getBreakRoom().remainingCoffee() != 0) {
 				System.out.println(mName + " goes to get some coffee.");
-				Coffee coffee = mBreakRoom.serveCoffee();
-				setEnergy(coffee.drink());
-				// Delay while drinking
-				try {
-					Thread.sleep(1000);
-				} catch (Exception e) {}
 
-				System.out.println(mName + " consumes a " + coffee.drinkType() +
-						" and now has " + mEnergy + " energy.");
-				// One in five chance to create 5 bonus cups of coffee
-				if (RandomGenerator.bonusCoffeeChance()) {
-					mBreakRoom.bonusCoffee();
-					System.out.println("5 drinks added!");
+				while (mEnergy <= 100 && BreakRoom.getBreakRoom().remainingCoffee() != 0) {
+					Coffee coffee = mBreakRoom.serveCoffee();
 
+					setEnergy(coffee.drink());
+					System.out.println(mName + " consumes a " + coffee.drinkType() + " and now has " + mEnergy
+							+ " energy. Drinks remaining: " + mBreakRoom.remainingCoffee());
+					// Delay while drinking
+					try {
+						Thread.sleep(1000);
+					} catch (Exception e) {
+					}
+					// One in five chance to create 5 bonus cups of coffee if if
+					if (RandomGenerator.bonusCoffeeChance()) {
+						mBreakRoom.bonusCoffee();
+						System.out
+								.println("5 drinks added! Current amount of drinks is " + mBreakRoom.remainingCoffee());
+					}
 				}
-				System.out.println("Drinks remaining in machine: " + mBreakRoom.remainingCoffee());
+				if (mEnergy >= 100) {
+					System.out.println(mName + " going back to work.");
+				}
+			} else if (BreakRoom.getBreakRoom().remainingCoffee() <= 0) {
+				System.out.println(mName + " notices machine is empty.");
+				break;
 			}
 		}
-		System.out.println("Fuck this i'm going home.");
-		// Delete person
+		// Output depending on how the main loop ended. Either ran out of coffee or
+		// energy
+		if (mEnergy < 0) {
+			System.out.println(mName + " is out of energy and is going home.");
+		} else {
+			System.out.println("No coffee = no work. " + mName + " is going home.");
+		}
 	}
 }

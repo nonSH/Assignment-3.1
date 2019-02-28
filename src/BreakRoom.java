@@ -28,9 +28,13 @@ public class BreakRoom {
 
 	// Returns first drink in ArrayList and removes it from "machine"
 	public synchronized Coffee serveCoffee() {
+		if(!coffeeArray.isEmpty()) {
 		Coffee coffee = coffeeArray.get(0);
 		coffeeArray.remove(0);
 		return coffee;
+		}
+		else
+			return null;
 	}
 
 	// Get amount of drinks remaining
