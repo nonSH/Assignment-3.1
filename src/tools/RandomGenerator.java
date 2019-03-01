@@ -1,5 +1,4 @@
 package tools;
-
 import java.util.Random;
 
 // Toolkit for all random interactions
@@ -11,13 +10,11 @@ public class RandomGenerator {
 		int i = r.nextInt(20) + 20;
 		return i;
 	}
-
 	public static int cappucinoEnergy() {
 		Random r = new Random();
 		int i = r.nextInt(10) + 20;
 		return i;
 	}
-
 	public static int latteEnergy() {
 		Random r = new Random();
 		int i = r.nextInt(10) + 25;
@@ -68,5 +65,19 @@ public class RandomGenerator {
 
 		}
 		return bool;
+	}
+	
+	// Return an integer representing an index in array of names
+	public static int randomName(int size) {
+		Random r = new Random();
+		int i = r.nextInt(size);
+		return i;
+	}
+	
+	// Returns a value between 30 and 90
+	public static int randomEnergy() {
+		Random r = new Random();
+		int i = r.nextInt(60) + 30;
+		return i;
 	}
 }

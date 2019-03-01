@@ -1,12 +1,11 @@
 import tools.RandomGenerator;
 
-// Class implementing Coffee interface, inherits drink() method
+// Class implementing Coffee interface
 public class Latte implements Coffee {
 	private int energy;
 	private String drink = "Latte";
 
 	public Latte() {
-		// Uses RandomGenerator class
 		energy = RandomGenerator.latteEnergy();
 	}
 

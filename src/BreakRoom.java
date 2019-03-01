@@ -2,44 +2,47 @@ import java.util.ArrayList;
 
 import tools.RandomGenerator;
 
-// Singleton class for interactions between coffee machine, coffee, and persons
+// Singleton class for interactions between coffee machine and persons
 public class BreakRoom {
 	private static BreakRoom obj;
-	private static ArrayList<Coffee> coffeeArray;
 	private CoffeeMachine machine;
-
+	private ArrayList<String> NAMES = new ArrayList<>();
+	
 	// Constructor. Called by getBreakRoom()
 	private BreakRoom() {
-		initiateBreakroom();
-	}
-
-	private void initiateBreakroom() {
-		coffeeArray = new ArrayList<>();
 		machine = new CoffeeMachine();
-		coffeeArray = machine.getArray();
+		getNames();
 	}
-
+	
+	// Method to gather all names from Enum class Names
+	public void getNames() {
+		for(int i = 0; i < Names.values().length; i++) {
+			NAMES.add(Names.values()[i].toString());
+		}
+	}
+	
+	// Pick a random name from NAMES array, removes it after so no duplicates
+	public String pullName() {
+		int size = NAMES.size();
+		int number = RandomGenerator.randomName(size);
+		String name = NAMES.get(number);
+		NAMES.remove(number);
+		return name;
+	}
+	
 	// Add bonus coffee to machine
 	public void bonusCoffee() {
-		for (int i = 0; i < 5; i++) {
-			coffeeArray.add(machine.coffeeCup());
-		}
+		machine.bonusCoffee();
 	}
-
+	
 	// Returns first drink in ArrayList and removes it from "machine"
 	public synchronized Coffee serveCoffee() {
-		if(!coffeeArray.isEmpty()) {
-		Coffee coffee = coffeeArray.get(0);
-		coffeeArray.remove(0);
-		return coffee;
-		}
-		else
-			return null;
+		return machine.serveCoffee();
 	}
-
+	
 	// Get amount of drinks remaining
 	public int remainingCoffee() {
-		return coffeeArray.size();
+		return machine.remainingCoffee();
 	}
 
 	// Constructs a BreakRoom if one is not already instantiated

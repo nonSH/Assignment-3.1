@@ -13,27 +13,16 @@ public class main {
 		t2.start();
 		t3.start();
 		t4.start();
-		t5.start();
-		t1.stop();
-		
+		t5.start();		
 	}
 }
 
 /*
+ * CHANGES:
  * 
- * To-do:
- * Two persons with same name?
- * 
- * MAKE PEOPLE GO HOME
- * 
- * What to do when no more coffee?
- * 
- * A person will NEVER get to 100 energy since only one drink is consumed per loop, while < 30 energy
- * possible solutions:
- * 1. increase energy dropped so a coffee has a chance to NOT cover energy dropped
- * 2. drop energy only when at office
- * 
- * Idea: remove ArrayList from break room and only have the one in coffee machine.
- * It's more reasonable to have the coffee stored in the machine rather than the room itself
- * Methods to return size, coffee and bonus coffee from machine will be created in break room
+ * 1. created random functions for name and energy in RandomGenerator
+ * 2. moved responsibility of names to breakroom. otherwise every person gets an unique array of names, 
+ * which makes it possible to get duplicate names
+ * 3. moved all interactions with the array of coffee to coffee machine. Breakroom now only has set/get methods to interact
+ * 4. commentzzz
  */

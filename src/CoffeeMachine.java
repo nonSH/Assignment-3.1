@@ -31,4 +31,28 @@ public class CoffeeMachine {
 		Coffee c = factory.getCoffee(RandomGenerator.randomCoffeeType());
 		return c;
 	}
+	
+	// Add bonus coffee to machine
+	public void bonusCoffee() {
+		for (int i = 0; i < 5; i++) {
+			list.add(coffeeCup());
+		}
+	}
+	
+	// Get amount of drinks remaining
+	public int remainingCoffee() {
+		return list.size();
+	}
+	
+	// Returns first drink in ArrayList and removes it from "machine"
+	public synchronized Coffee serveCoffee() {
+		if(!list.isEmpty()) {
+		Coffee coffee = list.get(0);
+		list.remove(0);
+		return coffee;
+		}
+		else
+			return null;
+	}
+
 }

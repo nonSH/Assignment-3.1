@@ -1,26 +1,22 @@
-import java.util.Random;
 
 import tools.RandomGenerator;
 
 public class Person implements Runnable {
-	private Names mName;
 	private int mEnergy;
-	private Random rName = new Random();
-	private Random rEnergy = new Random();
+	private String mName;
+
 	private BreakRoom mBreakRoom;
 
 	// Constructor
 	public Person(BreakRoom breakRoom) {
-		// Pulls a random name from Names enum and generates a
-		// random energy level between 30-90
-		mName = Names.values()[rName.nextInt(Names.values().length)];
-		mEnergy = rEnergy.nextInt(60) + 30;
 		mBreakRoom = breakRoom;
+		mEnergy = RandomGenerator.randomEnergy();
+		setName();
 	}
 
-	// Temporary method. Remove
-	public void energy() {
-		System.out.println(mEnergy + " :" + mName);
+	// Pulls a random name from shared NAMES array. Does not allow duplicates
+	public void setName() {
+		mName = mBreakRoom.pullName();
 	}
 
 	// Method to adjust energy level, both static loss and gain when drinking coffee
@@ -30,18 +26,20 @@ public class Person implements Runnable {
 
 	@Override
 	public void run() {
-
+		// Program will run until energy reaches 0 or stock of coffee depletes
 		while (mEnergy > 0) {
-			setEnergy(-15);
+			setEnergy(-1);
 			try {
 				// Small delay so Thread is not locking program to one person
 				Thread.sleep(200);
 			} catch (Exception e) {
 			}
-
+			
+			// Goes to coffee machine IF energy reaches 30 and machine has remaining coffee
 			if (mEnergy <= 30 && BreakRoom.getBreakRoom().remainingCoffee() != 0) {
 				System.out.println(mName + " goes to get some coffee.");
-
+				
+				// Stays at machine until energy reaches 100
 				while (mEnergy <= 100 && BreakRoom.getBreakRoom().remainingCoffee() != 0) {
 					Coffee coffee = mBreakRoom.serveCoffee();
 
@@ -53,16 +51,19 @@ public class Person implements Runnable {
 						Thread.sleep(1000);
 					} catch (Exception e) {
 					}
-					// One in five chance to create 5 bonus cups of coffee if if
+					// One in five chance to create 5 bonus cups of coffee
 					if (RandomGenerator.bonusCoffeeChance()) {
 						mBreakRoom.bonusCoffee();
 						System.out
 								.println("5 drinks added! Current amount of drinks is " + mBreakRoom.remainingCoffee());
 					}
 				}
+				
+				// Goes back to work when energy reaches 100
 				if (mEnergy >= 100) {
 					System.out.println(mName + " going back to work.");
 				}
+				// Goes home if there's no more coffee
 			} else if (BreakRoom.getBreakRoom().remainingCoffee() <= 0) {
 				System.out.println(mName + " notices machine is empty.");
 				break;
@@ -71,9 +72,9 @@ public class Person implements Runnable {
 		// Output depending on how the main loop ended. Either ran out of coffee or
 		// energy
 		if (mEnergy < 0) {
-			System.out.println(mName + " is out of energy and is going home.");
+			System.out.println(mName + " is exhausted and is going home.");
 		} else {
-			System.out.println("No coffee = no work. " + mName + " is going home.");
+			System.out.println("No coffee = no work! " + mName + " is going home.");
 		}
 	}
 }
